@@ -22,6 +22,12 @@ namespace KitabhChautari.Api.Data.Entities
 
         [MaxLength(250)]
         public string PasswordHash { get; set; }
+<<<<<<< HEAD
         public bool IsApproved { get; internal set; }
+=======
+
+        public bool IsApproved = true;
+
+>>>>>>> d2ae6872317c71176260362304b6a08dc63bb7d0
     }
 }
