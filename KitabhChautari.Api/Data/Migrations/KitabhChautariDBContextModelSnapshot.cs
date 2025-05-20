@@ -37,7 +37,7 @@ namespace KitabhChautari.Api.Data.Migrations
 
                     b.HasKey("Author_id");
 
-                    b.ToTable("authors");
+                    b.ToTable("authors", (string)null);
                 });
 
             modelBuilder.Entity("KitabhChauta.Model.Book", b =>
@@ -102,7 +102,7 @@ namespace KitabhChautari.Api.Data.Migrations
 
                     b.HasIndex("Publisher_id");
 
-                    b.ToTable("Books");
+                    b.ToTable("Books", (string)null);
                 });
 
             modelBuilder.Entity("KitabhChauta.Model.Genre", b =>
@@ -120,7 +120,7 @@ namespace KitabhChautari.Api.Data.Migrations
 
                     b.HasKey("Genre_id");
 
-                    b.ToTable("Genres");
+                    b.ToTable("Genres", (string)null);
                 });
 
             modelBuilder.Entity("KitabhChauta.Model.Publisher", b =>
@@ -138,7 +138,7 @@ namespace KitabhChautari.Api.Data.Migrations
 
                     b.HasKey("Publisher_id");
 
-                    b.ToTable("Publishers");
+                    b.ToTable("Publishers", (string)null);
                 });
 
             modelBuilder.Entity("KitabhChautari.Api.Data.Entities.User", b =>
@@ -179,7 +179,7 @@ namespace KitabhChautari.Api.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users");
+                    b.ToTable("Users", (string)null);
 
                     b.HasData(
                         new

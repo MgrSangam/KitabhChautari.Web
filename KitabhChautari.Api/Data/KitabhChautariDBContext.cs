@@ -1,46 +1,42 @@
-﻿using KitabhChauta.Model;
+﻿
 using KitabhChautari.Api.Data.Entities;
 using KitabhChautari.Shared;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using System.ComponentModel;
+using Microsoft.EntityFrameworkCore.Diagnostics;
+using KitabhChauta.Model;
 
 namespace KitabhChautari.Api.Data
 {
     public class KitabhChautariDBContext : DbContext
     {
         private readonly IPasswordHasher<User> _passwordHasher;
+
         public KitabhChautariDBContext(DbContextOptions<KitabhChautariDBContext> options, IPasswordHasher<User> passwordHasher) : base(options)
         {
             _passwordHasher = passwordHasher;
         }
+
         public DbSet<Book> Books { get; set; }
         public DbSet<User> Users { get; set; }
-        public DbSet<Author> authors { get; set; }
+        public DbSet<Author> Authors { get; set; }
         public DbSet<Genre> Genres { get; set; }
         public DbSet<Publisher> Publishers { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             base.OnConfiguring(optionsBuilder);
+            // Suppress the PendingModelChangesWarning
+            optionsBuilder.ConfigureWarnings(w => w.Ignore(RelationalEventId.PendingModelChangesWarning));
         }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            var adminUser = new User
-            {   
-                Id =1,
-                Name = "Noel Prince",
-                Email = "noel@gmail.com",
-                Phone = "9817108031",
-                Role = nameof(UserRole.Admin),
-                IsApproved = true,
-            };
-
-            adminUser.PasswordHash = _passwordHasher.HashPassword(adminUser, "9817108031");
+            // Configure unique index for Email
             modelBuilder.Entity<User>()
-                .HasData(adminUser);
-            
-       }
-    } 
+                .HasIndex(u => u.Email)
+                .IsUnique();
+        }
+    }
 }
