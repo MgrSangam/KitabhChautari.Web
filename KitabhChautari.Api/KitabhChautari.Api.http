@@ -1,0 +1,6 @@
+@KitabhChautari.Api_HostAddress = http://localhost:5058
+
+GET {{KitabhChautari.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
