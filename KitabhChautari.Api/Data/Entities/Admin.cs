@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using KitabhChautari.Shared;
+using System.ComponentModel.DataAnnotations;
+
 
 namespace KitabhChautari.Api.Data.Entities
 {
@@ -9,8 +11,6 @@ namespace KitabhChautari.Api.Data.Entities
         public string Name { get; set; }
         public string Email { get; set; }
         public string Role { get; set; } = nameof(UserRole.Admin);
-        public DateTime CreatedAt { get; set; }
-        public DateTime? UpdatedAt { get; set; }
         public string PasswordHash { get; set; }
 
     }
