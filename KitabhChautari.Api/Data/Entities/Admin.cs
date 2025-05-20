@@ -6,7 +6,6 @@ namespace KitabhChautari.Api.Data.Entities
 {
     public class Admin
     {
-
         public int AdminId { get; set; }
 
         [MaxLength(20)]
@@ -14,6 +13,7 @@ namespace KitabhChautari.Api.Data.Entities
 
         [MaxLength(100)]
         public string Email { get; set; }
+
         [MaxLength(10)]
         public string Phone { get; set; }
 
@@ -22,12 +22,7 @@ namespace KitabhChautari.Api.Data.Entities
 
         [MaxLength(250)]
         public string PasswordHash { get; set; }
-<<<<<<< HEAD
-        public bool IsApproved { get; internal set; }
-=======
 
-        public bool IsApproved = true;
-
->>>>>>> d2ae6872317c71176260362304b6a08dc63bb7d0
+        public bool IsApproved { get;  set; } = true; 
     }
 }

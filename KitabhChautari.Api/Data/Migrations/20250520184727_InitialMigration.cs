@@ -133,7 +133,7 @@ namespace KitabhChautari.Api.Data.Migrations
             migrationBuilder.InsertData(
                 table: "Admins",
                 columns: new[] { "AdminId", "Email", "IsApproved", "Name", "PasswordHash", "Phone", "Role" },
-                values: new object[] { 1, "noel@gmail.com", true, "Noel Prince", "AQAAAAIAAYagAAAAEMtuAwXaEExgdPBe6P2NLi7f6Jrp7+0lpdeO8YzIboVyNsda4jjrwU8JKfgi2M7y4A==", "9817108031", "Admin" });
+                values: new object[] { 1, "noel@gmail.com", true, "Noel Prince", "AQAAAAIAAYagAAAAELo62xiJ35dm/zG0K2ZuAv3viqhJYOc/y9De/60V1ZbMrzOKix7TsrRVWT419RqVcw==", "9817108031", "Admin" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Books_Author_id",

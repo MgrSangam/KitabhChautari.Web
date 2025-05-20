@@ -188,7 +188,7 @@ namespace KitabhChautari.Api.Data.Migrations
                             Email = "noel@gmail.com",
                             IsApproved = true,
                             Name = "Noel Prince",
-                            PasswordHash = "AQAAAAIAAYagAAAAEMtuAwXaEExgdPBe6P2NLi7f6Jrp7+0lpdeO8YzIboVyNsda4jjrwU8JKfgi2M7y4A==",
+                            PasswordHash = "AQAAAAIAAYagAAAAELo62xiJ35dm/zG0K2ZuAv3viqhJYOc/y9De/60V1ZbMrzOKix7TsrRVWT419RqVcw==",
                             Phone = "9817108031",
                             Role = "Admin"
                         });

@@ -10,11 +10,17 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddTransient<IPasswordHasher<Admin>, PasswordHasher<Admin>>();
+
+builder.Services.AddDbContext<KitabhChautariDBContext>(options =>
+{
+    var connectingString = builder.Configuration.GetConnectionString("PostgressConnection");
+    options.UseNpgsql(connectingString);
+
+});
 var app = builder.Build();
 
-#if DEBUG
-ApplyDbMigrations(app.Services);
-#endif
+
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
