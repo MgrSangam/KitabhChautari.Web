@@ -10,18 +10,6 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddTransient<IPasswordHasher<Admin>, PasswordHasher<Admin>>();
-<<<<<<< HEAD
-
-builder.Services.AddDbContext<KitabhChautariDBContext>(options =>
-{
-    var connectingString  = builder.Configuration.GetConnectionString("PostgresConnection");
-    options.UseNpgsql(connectingString);
-
-});
-
-=======
->>>>>>> d2ae6872317c71176260362304b6a08dc63bb7d0
 var app = builder.Build();
 
 #if DEBUG
