@@ -31,6 +31,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+ApplyDbMigrations(app.Services);
 
 app.Run();
 static void ApplyDbMigrations(IServiceProvider sp)
