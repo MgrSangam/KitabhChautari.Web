@@ -1,0 +1,65 @@
+﻿@page "/auth/login"
+
+@layout EmptyLayout
+
+
+<div class="container">
+    <div class="leftContainer">
+    </div>
+
+    <div class="rightContainer">
+        <h1 class="heading1">Welcome Back</h1>
+        <p>Please enter your details</p>
+
+
+        <div class="row">
+
+            <EditForm Model="_model" OnValidSubmit="LoginAsync">
+                <DataAnnotationsValidator />
+                <div class=" mb-3">
+                    <label class="form-label"> Email Address : </label>
+                    <InputText @bind-Value="_model.Username" class="form-control"/>
+                    <ValidationMessage For="() => _model.Username" />
+                </div>
+
+                <div class=" mb-3">
+                    <label class="form-label"> Password : </label>
+                    <InputText type="password" @bind-Value="_model.PasswordHash" class="form-control" />
+                    
+                    <ValidationMessage For="() => _model.PasswordHash" />
+                </div>
+
+                <div class="mb-3">
+                    @if (!_isLoading)
+                    {
+
+
+                        <button type="submit" class="btn btn-primary">Login</button>
+                    }
+                    else
+                    {
+                        <button type="button" disabled class="btn btn-secondary">Logging in ____</button>
+                    }
+                </div>
+
+            </EditForm>
+        </div>
+
+
+    </div>
+
+
+</div>
+@code {
+    private LoginDto _model = new();
+    private bool _isLoading;
+
+    private async Task LoginAsync()
+    {
+        _isLoading = true;
+        await Task.Delay(2000);
+
+        _isLoading = false;
+        
+    }
+}
