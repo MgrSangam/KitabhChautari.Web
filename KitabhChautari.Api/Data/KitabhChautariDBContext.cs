@@ -9,8 +9,8 @@ namespace KitabhChautari.Api.Data
 {
     public class KitabhChautariDBContext : DbContext
     {
-        private readonly IPasswordHasher<User> _passwordHasher;
-        public KitabhChautariDBContext(DbContextOptions<KitabhChautariDBContext> options, IPasswordHasher<User> passwordHasher) : base(options)
+        private readonly IPasswordHasher<Admin> _passwordHasher;
+        public KitabhChautariDBContext(DbContextOptions<KitabhChautariDBContext> options, IPasswordHasher<Admin> passwordHasher) : base(options)
         {
             _passwordHasher = passwordHasher;
         }
@@ -39,9 +39,9 @@ namespace KitabhChautari.Api.Data
             };
 
             adminUser.PasswordHash = _passwordHasher.HashPassword(adminUser, "9817108031");
-            modelBuilder.Entity<Admin>(entity =>
-            {
-            }
-    }
+            modelBuilder.Entity<Admin>()
+                .HasData(adminUser);
+            
+       }
     } 
 }
