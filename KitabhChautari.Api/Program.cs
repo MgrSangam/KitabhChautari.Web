@@ -12,7 +12,10 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddTransient<IPasswordHasher<Admin>, PasswordHasher<Admin>>();
 var app = builder.Build();
+
+#if DEBUG
 ApplyDbMigrations(app.Services);
+#endif
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -28,13 +31,10 @@ app.Run();
 static void ApplyDbMigrations(IServiceProvider sp)
 {
     var scope = sp.CreateScope();
-    var context = sp.GetRequiredService<KitabhChautariDBContext>();
-    if (context.Database.GetPendingMigrations().Any()
+    var context = scope.ServiceProvider.GetRequiredService<KitabhChautariDBContext>();
+    if (context.Database.GetPendingMigrations().Any())
         {
         context.Database.Migrate();
     }
 }
-internal record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
-{
-    public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
-}
+
