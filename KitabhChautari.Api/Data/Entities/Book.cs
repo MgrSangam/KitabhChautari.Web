@@ -93,8 +93,9 @@ namespace KitabhChauta.Model
             // Foreign Keys
             public int Author_id { get; set; }
             [ForeignKey("Author_id")]
+        public Author? Author { get; set; }
 
-            public int Genre_id { get; set; }
+        public int Genre_id { get; set; }
             [ForeignKey("Genre_id")]
             public Genre? Genre { get; set; }
 
