@@ -20,6 +20,8 @@ builder.Services.AddDbContext<KitabhChautariDBContext>(options =>
 });
 var app = builder.Build();
 
+#if DEBUG
+ApplyDbMigrations(app.Services);
 
 
 // Configure the HTTP request pipeline.
