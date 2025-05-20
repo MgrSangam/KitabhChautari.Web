@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace KitabhChautari.Api.Data.Entities
 {
-    public class Member
+    public class User
     {
         public int Id { get; set; }
 
@@ -19,6 +19,9 @@ namespace KitabhChautari.Api.Data.Entities
         [MaxLength(250)]
         public string PasswordHash { get; set; }
         [MaxLength(15)]
-        public  string Role { get; set; } = nameof(UserRole.Member); 
+        public  string Role { get; set; } = nameof(UserRole.Member);
+
+        public bool IsApproved { get; set; }
+
     }
 }

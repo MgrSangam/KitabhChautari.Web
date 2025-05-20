@@ -2,6 +2,7 @@ using KitabhChautari.Api.Data;
 using KitabhChautari.Api.Data.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using System.Threading.Tasks;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,19 +11,19 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddTransient<IPasswordHasher<Admin>, PasswordHasher<Admin>>();
+builder.Services.AddTransient<IPasswordHasher<User>, PasswordHasher<User>>();
 
 builder.Services.AddDbContext<KitabhChautariDBContext>(options =>
 {
-    var connectingString = builder.Configuration.GetConnectionString("PostgressConnection");
+    var connectingString = builder.Configuration.GetConnectionString("PostgresConnection");
     options.UseNpgsql(connectingString);
 
 });
 var app = builder.Build();
 
 #if DEBUG
-ApplyDbMigrations(app.Services);
-
+await ApplyDbMigrationsAsync(app.Services); // Fix: Added 'await' to ensure the method is awaited.
+#endif
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -33,16 +34,14 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-ApplyDbMigrations(app.Services);
-
 app.Run();
-static void ApplyDbMigrations(IServiceProvider sp)
+
+static async Task ApplyDbMigrationsAsync(IServiceProvider sp)
 {
-    var scope = sp.CreateScope();
+    using var scope = sp.CreateScope();
     var context = scope.ServiceProvider.GetRequiredService<KitabhChautariDBContext>();
-    if (context.Database.GetPendingMigrations().Any())
-        {
-        context.Database.Migrate();
+    if ((await context.Database.GetPendingMigrationsAsync()).Any())
+    {
+        await context.Database.MigrateAsync();
     }
 }
-

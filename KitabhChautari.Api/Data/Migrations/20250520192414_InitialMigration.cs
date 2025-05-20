@@ -13,24 +13,6 @@ namespace KitabhChautari.Api.Data.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Admins",
-                columns: table => new
-                {
-                    AdminId = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Name = table.Column<string>(type: "character varying(20)", maxLength: 20, nullable: false),
-                    Email = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
-                    Phone = table.Column<string>(type: "character varying(10)", maxLength: 10, nullable: false),
-                    Role = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
-                    PasswordHash = table.Column<string>(type: "character varying(250)", maxLength: 250, nullable: false),
-                    IsApproved = table.Column<bool>(type: "boolean", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Admins", x => x.AdminId);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "authors",
                 columns: table => new
                 {
@@ -57,23 +39,6 @@ namespace KitabhChautari.Api.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Members",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Name = table.Column<string>(type: "character varying(20)", maxLength: 20, nullable: false),
-                    Email = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
-                    Phone = table.Column<string>(type: "character varying(10)", maxLength: 10, nullable: false),
-                    PasswordHash = table.Column<string>(type: "character varying(250)", maxLength: 250, nullable: false),
-                    Role = table.Column<string>(type: "character varying(15)", maxLength: 15, nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Members", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Publishers",
                 columns: table => new
                 {
@@ -84,6 +49,24 @@ namespace KitabhChautari.Api.Data.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Publishers", x => x.Publisher_id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Users",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Name = table.Column<string>(type: "character varying(20)", maxLength: 20, nullable: false),
+                    Email = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
+                    Phone = table.Column<string>(type: "character varying(10)", maxLength: 10, nullable: false),
+                    PasswordHash = table.Column<string>(type: "character varying(250)", maxLength: 250, nullable: false),
+                    Role = table.Column<string>(type: "character varying(15)", maxLength: 15, nullable: false),
+                    IsApproved = table.Column<bool>(type: "boolean", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Users", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -131,9 +114,9 @@ namespace KitabhChautari.Api.Data.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "Admins",
-                columns: new[] { "AdminId", "Email", "IsApproved", "Name", "PasswordHash", "Phone", "Role" },
-                values: new object[] { 1, "noel@gmail.com", true, "Noel Prince", "AQAAAAIAAYagAAAAELo62xiJ35dm/zG0K2ZuAv3viqhJYOc/y9De/60V1ZbMrzOKix7TsrRVWT419RqVcw==", "9817108031", "Admin" });
+                table: "Users",
+                columns: new[] { "Id", "Email", "IsApproved", "Name", "PasswordHash", "Phone", "Role" },
+                values: new object[] { 1, "noel@gmail.com", true, "Noel Prince", "AQAAAAIAAYagAAAAECIJC++slvZXt/3FMmp6/z7sB86Y5nhCA8JpeMBB7telmDyqQwHhnnGyQhAjodb9Lg==", "9817108031", "Admin" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Books_Author_id",
@@ -155,13 +138,10 @@ namespace KitabhChautari.Api.Data.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Admins");
-
-            migrationBuilder.DropTable(
                 name: "Books");
 
             migrationBuilder.DropTable(
-                name: "Members");
+                name: "Users");
 
             migrationBuilder.DropTable(
                 name: "Genres");

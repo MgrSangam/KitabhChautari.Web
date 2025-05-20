@@ -9,14 +9,13 @@ namespace KitabhChautari.Api.Data
 {
     public class KitabhChautariDBContext : DbContext
     {
-        private readonly IPasswordHasher<Admin> _passwordHasher;
-        public KitabhChautariDBContext(DbContextOptions<KitabhChautariDBContext> options, IPasswordHasher<Admin> passwordHasher) : base(options)
+        private readonly IPasswordHasher<User> _passwordHasher;
+        public KitabhChautariDBContext(DbContextOptions<KitabhChautariDBContext> options, IPasswordHasher<User> passwordHasher) : base(options)
         {
             _passwordHasher = passwordHasher;
         }
         public DbSet<Book> Books { get; set; }
-        public DbSet<Member> Members { get; set; }
-        public DbSet<Admin> Admins { get; set; }
+        public DbSet<User> Users { get; set; }
         public DbSet<Author> authors { get; set; }
         public DbSet<Genre> Genres { get; set; }
         public DbSet<Publisher> Publishers { get; set; }
@@ -28,9 +27,9 @@ namespace KitabhChautari.Api.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            var adminUser = new Admin
-            {
-                AdminId = 1,
+            var adminUser = new User
+            {   
+                Id =1,
                 Name = "Noel Prince",
                 Email = "noel@gmail.com",
                 Phone = "9817108031",
@@ -39,7 +38,7 @@ namespace KitabhChautari.Api.Data
             };
 
             adminUser.PasswordHash = _passwordHasher.HashPassword(adminUser, "9817108031");
-            modelBuilder.Entity<Admin>()
+            modelBuilder.Entity<User>()
                 .HasData(adminUser);
             
        }

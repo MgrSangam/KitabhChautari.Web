@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace KitabhChautari.Api.Data.Migrations
 {
     [DbContext(typeof(KitabhChautariDBContext))]
-    [Migration("20250520184727_InitialMigration")]
+    [Migration("20250520192414_InitialMigration")]
     partial class InitialMigration
     {
         /// <inheritdoc />
@@ -144,13 +144,13 @@ namespace KitabhChautari.Api.Data.Migrations
                     b.ToTable("Publishers");
                 });
 
-            modelBuilder.Entity("KitabhChautari.Api.Data.Entities.Admin", b =>
+            modelBuilder.Entity("KitabhChautari.Api.Data.Entities.User", b =>
                 {
-                    b.Property<int>("AdminId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("AdminId"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -177,62 +177,24 @@ namespace KitabhChautari.Api.Data.Migrations
 
                     b.Property<string>("Role")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("character varying(50)");
-
-                    b.HasKey("AdminId");
-
-                    b.ToTable("Admins");
-
-                    b.HasData(
-                        new
-                        {
-                            AdminId = 1,
-                            Email = "noel@gmail.com",
-                            IsApproved = true,
-                            Name = "Noel Prince",
-                            PasswordHash = "AQAAAAIAAYagAAAAELo62xiJ35dm/zG0K2ZuAv3viqhJYOc/y9De/60V1ZbMrzOKix7TsrRVWT419RqVcw==",
-                            Phone = "9817108031",
-                            Role = "Admin"
-                        });
-                });
-
-            modelBuilder.Entity("KitabhChautari.Api.Data.Entities.Member", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("character varying(100)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("character varying(20)");
-
-                    b.Property<string>("PasswordHash")
-                        .IsRequired()
-                        .HasMaxLength(250)
-                        .HasColumnType("character varying(250)");
-
-                    b.Property<string>("Phone")
-                        .IsRequired()
-                        .HasMaxLength(10)
-                        .HasColumnType("character varying(10)");
-
-                    b.Property<string>("Role")
-                        .IsRequired()
                         .HasMaxLength(15)
                         .HasColumnType("character varying(15)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Members");
+                    b.ToTable("Users");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Email = "noel@gmail.com",
+                            IsApproved = true,
+                            Name = "Noel Prince",
+                            PasswordHash = "AQAAAAIAAYagAAAAECIJC++slvZXt/3FMmp6/z7sB86Y5nhCA8JpeMBB7telmDyqQwHhnnGyQhAjodb9Lg==",
+                            Phone = "9817108031",
+                            Role = "Admin"
+                        });
                 });
 
             modelBuilder.Entity("KitabhChauta.Model.Book", b =>
