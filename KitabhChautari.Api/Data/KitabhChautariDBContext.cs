@@ -1,5 +1,6 @@
 ﻿using KitabhChauta.Model;
 using KitabhChautari.Api.Data.Entities;
+using KitabhChautari.Shared;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel;
@@ -8,8 +9,8 @@ namespace KitabhChautari.Api.Data
 {
     public class KitabhChautariDBContext : DbContext
     {
-        private readonly IPasswordHasher<User> _passwordHasher;
-        public KitabhChautariDBContext(DbContextOptions<KitabhChautariDBContext> options, IPasswordHasher<User> passwordHasher) : base(options)
+        private readonly IPasswordHasher<Admin> _passwordHasher;
+        public KitabhChautariDBContext(DbContextOptions<KitabhChautariDBContext> options, IPasswordHasher<Admin> passwordHasher) : base(options)
         {
             _passwordHasher = passwordHasher;
         }
@@ -27,9 +28,9 @@ namespace KitabhChautari.Api.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            var adminUser = new User
+            var adminUser = new Admin
             {
-                Id = 1,
+                AdminId = 1,
                 Name = "Noel Prince",
                 Email = "noel@gmail.com",
                 Phone = "9817108031",
@@ -38,9 +39,9 @@ namespace KitabhChautari.Api.Data
             };
 
             adminUser.PasswordHash = _passwordHasher.HashPassword(adminUser, "9817108031");
-            modelBuilder.Entity<User>(entity =>
-            {
-            }
-    }
+            modelBuilder.Entity<Admin>()
+                .HasData(adminUser);
+            
+       }
     } 
 }
