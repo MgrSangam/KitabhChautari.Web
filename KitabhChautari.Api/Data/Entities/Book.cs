@@ -17,12 +17,13 @@ namespace KitabhChauta.Model
     public class Author
     {
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Author_id { get; set; }
 
         [MaxLength(50)]
         public string Author_Name { get; set; } = string.Empty;
 
-
+        public ICollection<Book> Books { get; set; } = new List<Book>();
 
 
     }
@@ -31,9 +32,12 @@ namespace KitabhChauta.Model
     public class Genre
     {
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Genre_id { get; set; }
         [MaxLength(50)]
         public string Genre_Name { get; set; } = string.Empty;
+
+        public ICollection<Book> Books { get; set; } = new List<Book>();
 
     }
 
@@ -42,9 +46,12 @@ namespace KitabhChauta.Model
     public class Publisher
     {
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Publisher_id { get; set; }
         [MaxLength(50)]
         public string Publisher_Name { get; set; } = string.Empty;
+
+        public ICollection<Book> Books { get; set; } = new List<Book>();
     }
 
 
@@ -53,8 +60,9 @@ namespace KitabhChauta.Model
     // Book class representing a book entity
     public class Book
      {
-            [Key]
-            public int BookId { get; set; }
+         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int BookId { get; set; }
 
             [Required(ErrorMessage = "Title is required")]
             public string Title { get; set; } = string.Empty;
