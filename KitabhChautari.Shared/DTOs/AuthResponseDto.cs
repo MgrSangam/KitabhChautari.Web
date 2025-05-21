@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace KitabhChautari.Shared.DTOs
 {
     
-        public record AuthResponseDto(LoggedInUser User, string? ErrorMessage = null)
+        public record class AuthResponseDto(LoggedInUser User, string? ErrorMessage = null)
         {
         [JsonIgnore]
 

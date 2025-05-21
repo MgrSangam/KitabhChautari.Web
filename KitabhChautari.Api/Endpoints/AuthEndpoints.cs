@@ -3,7 +3,7 @@ using KitabhChautari.Shared.DTOs;
 
 namespace KitabhChautari.Api.Endpoints
 {
-    public static class AuthEndpoints 
+    public static class AuthEndpoints
     {
         public static IEndpointRouteBuilder MapAuthEndpoints(this IEndpointRouteBuilder app)
         {

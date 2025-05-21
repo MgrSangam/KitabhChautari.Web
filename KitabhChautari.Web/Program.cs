@@ -15,7 +15,7 @@ builder.RootComponents.Add<HeadOutlet>("head::after");
 
 builder.Services.AddCascadingAuthenticationState();
 builder.Services.AddSingleton<KitabhChautariAuthStateProvider>();
-builder.Services.AddSingleton<AuthenticationStateProvider>(sp => sp.GetRequiredService<KitabhChautariAuthStateProvider>();
+builder.Services.AddSingleton<AuthenticationStateProvider>(sp => sp.GetRequiredService<KitabhChautariAuthStateProvider>());
 builder.Services.AddAuthorizationCore();
 
 
