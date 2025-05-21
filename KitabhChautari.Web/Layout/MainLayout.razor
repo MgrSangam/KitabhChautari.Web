@@ -1,4 +1,7 @@
 ﻿@inherits LayoutComponentBase
+
+@inject KitabhChautariAuthStateProvider KitabhChautariAuthStateProvider
+
 <div class="page">
     <div class="sidebar">
         <NavMenu />
@@ -10,7 +13,22 @@
         </div>
 
         <article class="content px-4">
-            @Body
+            @if (KitabhChautariAuthStateProvider.Initializing)
+            {
+                <p> Initializning state...</p>
+            }
+            else
+            {
+                @Body
+            }
         </article>
     </main>
 </div>
+
+@code {
+    protected override  Task OnInitializedAsync()
+    {
+
+        
+    }
+}

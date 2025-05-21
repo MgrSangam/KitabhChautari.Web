@@ -1,5 +1,6 @@
 ﻿using KitabhChautari.Api.Data;
 using KitabhChautari.Api.Data.Entities;
+using KitabhChautari.Shared;
 using KitabhChautari.Shared.DTOs;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -41,7 +42,8 @@ namespace KitabhChautari.Api.Services
 
             //Generate JWT Token
             var jwt = GenerateJwtToken(user);
-            return new AuthResponseDto(jwt);
+            var loggedInUser = new LoggedInUser(user.Id, user.Name, user.Role, jwt);
+            return new AuthResponseDto(loggedInUser);
         }
 
         private  string GenerateJwtToken(User user)

@@ -7,18 +7,13 @@ using System.Threading.Tasks;
 
 namespace KitabhChautari.Shared.DTOs
 {
-    public class AuthResponseDto
-    {
-        public string Token { get; set; }
-        public string? ErrorMessage { get; set; }
-
-        public AuthResponseDto(string token, string? errorMessage = null)
+    
+        public record AuthResponseDto(LoggedInUser User, string? ErrorMessage = null)
         {
-            Token = token;
-            ErrorMessage = errorMessage;
-        }
-
         [JsonIgnore]
+
         public bool HasError => ErrorMessage != null;
     }
+
+    
 }

@@ -10,3 +10,12 @@
         </LayoutView>
     </NotFound>
 </Router>
+
+@inject KitabhChautariAuthStateProvider KitabhChautariAuthStateProvider
+@code{
+    protected override  async Task OnInitializedAsync()
+    {
+        await KitabhChautariAuthStateProvider.InitializeAsync();
+
+    }
+}
