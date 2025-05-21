@@ -32,7 +32,7 @@ namespace KitabhChautari.Web.Auth
             NotifyAuthenticationStateChanged(_authStateTask);
         }
 
-        public async Task SetLoggedAsync()
+        public async Task SetLogoutAsync()
         {
             User = null;
             SetAuthStateTask();
@@ -56,6 +56,10 @@ namespace KitabhChautari.Web.Auth
                     return;
                 }
                 await SetLoginAsync(user);
+            }
+            catch(Exception ex)
+            {
+                
             }
             finally
             {

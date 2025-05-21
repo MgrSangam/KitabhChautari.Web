@@ -1,4 +1,9 @@
-﻿<div class="top-row ps-3 navbar navbar-dark">
+﻿@using KitabhChautari.Shared
+@inject KitabhChautariAuthStateProvider KitabhChautariAuthStateProvider
+@inject NavigationManager NavigationManager
+
+
+<div class="top-row ps-3 navbar navbar-dark">
     <div class="container-fluid">
         <a class="navbar-brand" href="">KitabhChautari.Web</a>
         <button title="Navigation menu" class="navbar-toggler" @onclick="ToggleNavMenu">
@@ -14,6 +19,11 @@
                 <span class="bi bi-house-door-fill-nav-menu" aria-hidden="true"></span> Home
             </NavLink>
         </div>
+
+
+        <AuthorizeView>
+            <Authorized>
+                <AuthorizeView Roles="@(nameof(UserRole.Admin))" Context="adminContext">
         <div class="nav-item px-3">
             <NavLink class="nav-link" href="manage-book">
                 <span class="bi bi-plus-square-fill-nav-menu" aria-hidden="true"></span> Manage Book
@@ -24,12 +34,25 @@
                 <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> Add Book
             </NavLink>
         </div>
+                </AuthorizeView>
 
+                <AuthorizeView Roles="@(nameof(UserRole.Member))" Context="memberContext">
+                    <div class="nav-item px-3">
+                        <NavLink class="nav-link" href="my-book">
+                            <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> My Books
+                        </NavLink>
+                    </div>
+
+                </AuthorizeView>
+            </Authorized>
+        </AuthorizeView>
         <div class="nav-item px-3">
-            <NavLink class="nav-link" href="my-book">
-                <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> My Books
+            <NavLink class="nav-link" @onclick="LogoutAsync">
+                <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> Logout
             </NavLink>
         </div>
+
+        
     </nav>
 </div>
 
@@ -41,5 +64,12 @@
     private void ToggleNavMenu()
     {
         collapseNavMenu = !collapseNavMenu;
+    }
+
+    private async Task LogoutAsync()
+    {
+        await KitabhChautariAuthStateProvider.SetLogoutAsync();
+        NavigationManager.NavigateTo("auth/login", replace:true);
+        
     }
 }
