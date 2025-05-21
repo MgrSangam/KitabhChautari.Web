@@ -1,0 +1,5 @@
+﻿@using Microsoft.AspNetCore.Authorization
+@using KitabhChautari.Shared
+
+
+@attribute [Authorize(Roles = nameof(UserRole.Member))]

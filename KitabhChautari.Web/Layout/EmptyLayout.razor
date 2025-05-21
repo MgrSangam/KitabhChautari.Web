@@ -1,3 +1,23 @@
 ﻿@inherits LayoutComponentBase
+@inject KitabhChautariAuthStateProvider KitabhChautariAuthStateProvider
 
-@Body
+
+@if (KitabhChautariAuthStateProvider.IsInitializing )
+{
+    <p>Initializing state ...........</p>
+}
+else
+{
+    @Body
+}
+
+@code{
+    protected override async Task OnInitializedAsync()
+    {
+
+        while (KitabhChautariAuthStateProvider.IsInitializing)
+        {
+            await Task.Delay(500);
+        }
+    }
+}

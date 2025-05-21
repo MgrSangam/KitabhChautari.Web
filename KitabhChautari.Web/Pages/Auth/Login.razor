@@ -14,18 +14,7 @@
     <div class="rightContainer">
         <h1 class="heading1">Welcome Back</h1>
         <p>Please enter your details</p>
-        <AuthorizeView>
-            <Authorizing>
-                <p> Authorizing...</p>
-            </Authorizing>
-            <NotAuthorized>
-                <p> Not Authorized</p>
-            </NotAuthorized>
-            <Authorized>
-                <p> = Authorized: @context.User.Claims.FirstOrDefault(c => c.Type == System.Security.Claims.ClaimTypes.Name)?.Value </p>
-
-            </Authorized>
-        </AuthorizeView>
+       
 
         <div class="row">
 
@@ -74,6 +63,16 @@
     private LoginDto _model = new();
     private bool _isLoading;
     private string? _error;
+
+
+    protected override void OnInitialized()
+    {
+        if (KitabhChautariAuthStateProvider.IsLoggedIn)
+        {
+            NavigationManager.NavigateTo("/", replace : true);
+        }
+    }
+
 
     private async Task LoginAsync()
     {
